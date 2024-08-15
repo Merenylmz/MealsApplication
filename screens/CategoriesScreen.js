@@ -12,7 +12,7 @@ const CategoriesScreen = ({navigation}) => {
     };
     return (
       <CategoryGridTile
-        item={itemData.item.title}
+        item={itemData.item}
         style={{ backgroundColor: itemData.item.color }}
         onPress={pressHandler}
       />

@@ -4,7 +4,7 @@ import React from "react";
 const MealItem = ({item}) => {
   return (
     <View style={styles.mealContainer}>
-        <Pressable android_ripple={{color: "#ccc"}}>
+        <Pressable android_ripple={{color: "#ccc"}} style={({pressed})=>pressed ? {color: "#ccc"}:null}>
             <View>
                 <Image source={{uri: item.imageUrl}} style={styles.image}/>
                 <Text style={styles.titleText}>{item.title}</Text>

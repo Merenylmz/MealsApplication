@@ -7,9 +7,10 @@ const MealsOverview = ({route}) => {
     const catId = route.params.categoryId;
 
     const displayedMeals = MEALS.filter((mealItem)=>{
-        return mealItem.categoryIds.indexOf(catId);
+        return mealItem.categoryIds.indexOf(catId) >= 0;
     })
-
+    
+    
     const renderMealItem = (itemData) =>{
         return <MealItem item={itemData.item}/>
     }

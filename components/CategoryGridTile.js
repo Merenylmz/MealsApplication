@@ -6,7 +6,7 @@ const CategoryGridTile = ({item, style, onPress}) => {
     <View style={[styles.gridItem, style]}>
         <Pressable style={{flex: 1}} android_ripple={{color: "#cccccc"}} onPress={onPress}>
             <View style={styles.innerContainer}>
-                <Text style={styles.title}>{item}</Text>
+                <Text style={styles.title}>{item.title}</Text>
             </View>
         </Pressable>
     </View>
