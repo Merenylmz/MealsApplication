@@ -1,19 +1,16 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import MealDetails from "./MealDetails";
 
-const MealItem = ({item}) => {
+const MealItem = ({item, onPress}) => {
   return (
     <View style={styles.mealContainer}>
-        <Pressable android_ripple={{color: "#ccc"}} style={({pressed})=>pressed ? {color: "#ccc"}:null}>
+        <Pressable android_ripple={{color: "#ccc"}} style={({pressed})=>pressed ? {color: "#ccc"}:null} onPress={onPress.bind(this, item.id)}>
             <View>
                 <Image source={{uri: item.imageUrl}} style={styles.image}/>
                 <Text style={styles.titleText}>{item.title}</Text>
             </View>
-            <View style={styles.detailsContainer}>
-                <Text style={styles.detailText}>{item.duration}m</Text>
-                <Text style={styles.detailText}>{item.complexity}</Text>
-                <Text style={styles.detailText}>{item.affordability}</Text>
-            </View>
+           <MealDetails item={item}/>
         </Pressable>
     </View>
   );

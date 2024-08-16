@@ -4,22 +4,40 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverview from "./screens/MealsOverview";
+import MealDetailScreen from "./screens/MealDetailScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import FavouriteScreen from "./screens/FavoriteScreen";
+import {Ionicons} from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigator = () =>{
+  return <Drawer.Navigator screenOptions={{
+    headerStyle: {backgroundColor: "#351401"},
+    headerTintColor: "white",
+    sceneContainerStyle: {backgroundColor: "#3f2f25"},
+    drawerStyle: {backgroundColor: "#351401"},
+    drawerInactiveTintColor: "white",
+    drawerActiveBackgroundColor: "#614336",
+    drawerActiveTintColor: "white"
+  }}>
+    <Drawer.Screen name="Categories" component={CategoriesScreen} options={{drawerIcon: ({size, color})=><Ionicons name="list" size={size} color={color}/>}}/>
+    <Drawer.Screen name="Favorites" component={FavouriteScreen} options={{drawerIcon: ({size, color})=><Ionicons name="heart" size={size} color={color}/>}}/>
+  </Drawer.Navigator>
+}
+
 export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MealsCategories" screenOptions={{
-          headerStyle: {backgroundColor: "#351401"},
-          headerTintColor: "white",
-          contentStyle: {backgroundColor: "#3f2f25"}
-        }}>
-          <Stack.Screen name="MealsCategories" component={CategoriesScreen} options={{title: "All Categories"}}/>
+        <Stack.Navigator>
+          <Stack.Screen name="Drawer" component={DrawerNavigator} options={{headerShown: false}}/>
           <Stack.Screen name="MealsOverview" component={MealsOverview} />
+          <Stack.Screen name="MealsDetail" component={MealDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
     </>
   );
 }

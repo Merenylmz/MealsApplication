@@ -19,9 +19,14 @@ const MealsOverview = ({route, navigation}) => {
         });
     }, [catId, navigation]);
     
+    const mealItem = (id) =>{
+        navigation.navigate("MealsDetail", {
+            mealId: id
+        });
+    }
     
     const renderMealItem = (itemData) =>{
-        return <MealItem item={itemData.item}/>
+        return <MealItem item={itemData.item} onPress={mealItem}/>
     }
     return (
         <View>
