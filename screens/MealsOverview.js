@@ -29,7 +29,7 @@ const MealsOverview = ({route, navigation}) => {
         return <MealItem item={itemData.item} onPress={mealItem}/>
     }
     return (
-        <View>
+        <View style={{marginBottom: 30}}>
             <FlatList
                 data={displayedMeals}
                 keyExractor={(item)=>item.id}

@@ -17,13 +17,13 @@ const MealDetailScreen = ({route, navigation}) => {
         navigation.setOptions({
             title: selectedMeal.title,
             headerRight: ()=>{
-                return <IconButton icon={"star"} color={"#ff0"} onPress={startButtonPressHandler}/>
+                return <IconButton icon={"star"} color={"#f27"} onPress={startButtonPressHandler}/>
             }
         });
     }, [route.params.mealId, selectedMeal.title]);
     
     return (
-        <ScrollView style={{marginBottom: 30}}>
+        <ScrollView style={{marginBottom: 30, backgroundColor: "#3f2f25"}}>
             <Image source={{uri: selectedMeal.imageUrl}} style={styles.image}/>
             <Text style={styles.title}>{selectedMeal.title}</Text>
             <MealDetails item={selectedMeal} textStyle={{color: "#fff"}} />
