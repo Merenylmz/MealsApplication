@@ -1,26 +1,40 @@
 import { Alert, Button, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import {useLayoutEffect} from "react";
+import {useLayoutEffect, useContext} from "react";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/Detail/Subtitle";
 import List from "../components/Detail/List";
 import IconButton from "../components/IconButton";
+import { FavoritesContext } from "../store/contexts/favorites-context";
+import { addFavorite, removeFavorite } from "../store/redux/Features/favorite";
+import { useDispatch, useSelector } from "react-redux";
 
 const MealDetailScreen = ({route, navigation}) => {
-    const selectedMeal = MEALS.find(meal => meal.id == route.params.mealId);
+    // const favoriteMealsCtx = useContext(FavoritesContext);
+    const favoriteMealIds = useSelector((state)=>state.favoriteMeals.ids);
 
-    const startButtonPressHandler = () =>{
-        Alert.alert("asdasda");
+    const selectedMeal = MEALS.find(meal => meal.id == route.params.mealId);
+    const mealIsFavorite = favoriteMealIds.includes(selectedMeal.id);
+    const dispatch = useDispatch();
+
+    const changeFavoriteHandler = () =>{
+        console.log(favoriteMealIds);
+        
+        if (mealIsFavorite) {
+            dispatch(removeFavorite(selectedMeal.id));
+        } else {
+            dispatch(addFavorite(selectedMeal.id));
+        }
     }
 
     useLayoutEffect(() => {
         navigation.setOptions({
             title: selectedMeal.title,
             headerRight: ()=>{
-                return <IconButton icon={"star"} color={"#f27"} onPress={startButtonPressHandler}/>
+                return <IconButton icon={mealIsFavorite ? "star" : "star-outline"} color={"#f27"} onPress={changeFavoriteHandler}/>
             }
         });
-    }, [route.params.mealId, selectedMeal.title]);
+    }, [navigation, changeFavoriteHandler]);
     
     return (
         <ScrollView style={{marginBottom: 30, backgroundColor: "#3f2f25"}}>
